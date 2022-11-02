@@ -6,6 +6,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -22,7 +23,28 @@ public class Deneme {
         Response response = httpRequest.get("");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
+        List<Object> objects = jsonPathEvaluator.get("data");
+
+          /*  boolean isExists = false;
+        for (int i = 0; i < objects.size(); i++){
+            if (((LinkedHashMap<?, ?>) objects.get(i)).get("employee_name").equals("Garrett Winters")) {
+                isExists = true;
+            }
+        }
+        Assert.assertTrue(isExists);
+        */
+
         List<String> names = jsonPathEvaluator.get("data.employee_name");
+
         String name = names.get(1);
+        System.out.println(name);
         Assert.assertEquals(name, "Garrett Winters");
+
+
+
+
+
+
+
+
     }}
